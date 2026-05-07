@@ -1,0 +1,10 @@
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\bin\Release\netstandard2.1\CoreClasses.deps.json
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\bin\Release\netstandard2.1\CoreClasses.dll
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\bin\Release\netstandard2.1\CoreClasses.pdb
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\obj\Release\netstandard2.1\CoreClasses.csproj.AssemblyReference.cache
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\obj\Release\netstandard2.1\CoreClasses.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\obj\Release\netstandard2.1\CoreClasses.AssemblyInfoInputs.cache
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\obj\Release\netstandard2.1\CoreClasses.AssemblyInfo.cs
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\obj\Release\netstandard2.1\CoreClasses.csproj.CoreCompileInputs.cache
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\obj\Release\netstandard2.1\CoreClasses.dll
+C:\Users\Lotem\Documents\OllieGameLogic\CoreClasses\obj\Release\netstandard2.1\CoreClasses.pdb

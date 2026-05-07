@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "w9l7Rrwlp2M=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Lotem\\Documents\\OllieGameLogic\\CoreClasses\\CoreClasses.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lotem\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
