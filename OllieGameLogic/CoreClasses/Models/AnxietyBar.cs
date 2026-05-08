@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CoreClasses.Models;
 
 namespace CoreClasses.Models
 {
     public class AnxietyBar
     {
+        [Newtonsoft.Json.JsonProperty]
         public float Value { get; private set; } = 50f;
         public float Max { get; } = 100f;
         public float DangerThreshold { get; } = 75f;
@@ -33,11 +35,15 @@ namespace CoreClasses.Models
         }
         public void MoveTowardBalance(float amount)
         {
-            if (Value > 50f)
-                Value = Math.Clamp(Value - amount, 0f, Max);
-            else if (Value < 50f)
-                Value = Math.Clamp(Value + amount, 0f, Max);
+            float target = 50f;
+            if (Math.Abs(Value - target) < amount)
+                Value = target;
+            else if (Value > target)
+                Value -= amount;
+            else
+                Value += amount;
         }
+
         // לתצוגת UI
         public float GetPercentage()
         {

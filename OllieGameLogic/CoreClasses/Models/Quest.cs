@@ -39,7 +39,7 @@ namespace CoreClasses.Models
             {
                 Status = QuestStatus.Finished;
                 IsCompleted = true;
-                player.WinBattle(RewardXP);
+                player.GainXP(RewardXP);
             }
         }
     }

@@ -12,25 +12,29 @@ public static class ItemDatabase
     public static IReadOnlyDictionary<int, Item> ItemsByID => _itemsByID;
     public static IReadOnlyDictionary<string, Item> ItemsByName => _itemsByName;
 
-    static ItemDatabase()
+    public static void Initialize(string jsonContent)
     {
-        LoadItems();
-    }
+        var items = JsonConvert.DeserializeObject<List<Item>>(jsonContent);
 
-    public static void LoadItems()
-    {
-        string json = File.ReadAllText("items.json");
-        var items = JsonConvert.DeserializeObject<List<Item>>(json);
-
-        if (items == null)
+        if (items != null)
+        {
+            _itemsByID = items.ToDictionary(i => i.ItemID, i => i);
+            _itemsByName = items.ToDictionary(i => i.Name, i => i);
+        }
+        else
         {
             _itemsByID = new Dictionary<int, Item>();
             _itemsByName = new Dictionary<string, Item>();
-            return;
         }
+    }
 
-        _itemsByID = items.ToDictionary(i => i.ItemID, i => i);
-        _itemsByName = items.ToDictionary(i => i.Name, i => i);
+    public static void LoadFromFile(string filePath = "items.json")
+    {
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            Initialize(json);
+        }
     }
 
     public static Item GetByID(int id)

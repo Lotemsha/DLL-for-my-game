@@ -27,10 +27,8 @@ namespace CoreClasses.Models
                 switch (StatName)
                 {
                     case StatType.MaxHealth:
-                        float oldHealth = player.Health;
-                        player.Health = Math.Min(player.Health + EffectValue, player.MaxHealth);
-                        float healed = player.Health - oldHealth;
-                        return $"{player.Name} used {Name} and recovered {healed} HP!";
+                        float healedAmount = player.Heal(this.EffectValue);
+                        return $"{player.Name} used {Name} and recovered {healedAmount} HP!";
 
                     case StatType.AnxietyRegen:
                         player.Anxiety.Decrease(EffectValue);

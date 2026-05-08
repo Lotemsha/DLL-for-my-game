@@ -12,9 +12,6 @@ namespace CoreClasses.Models
         public int RewardXP { get; set; }
         public EnemyType Type { get; set; }
         public int EmotionalResistance { get; set; }
-        public float TempAccuracyModifier { get; set; } = 1f;
-        public float TempSpeedModifier { get; set; } = 1f;
-        public float TempDamageModifier { get; set; } = 1f;
 
         public Enemy(int id, string name, int health, float speed, int damage, int xpReward, EnemyType enemyType, float baseAccuracy)
             : base(name, health, speed, health)
@@ -28,8 +25,6 @@ namespace CoreClasses.Models
         }
         public string Attack(PlayerManager player)
         {
-            player.TakeDamage(BaseDamage);
-
             string message = Type switch
             {
                 EnemyType.Fear =>

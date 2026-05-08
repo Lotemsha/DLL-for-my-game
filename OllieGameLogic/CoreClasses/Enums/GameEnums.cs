@@ -26,6 +26,20 @@
         XPBonus,           
         Accuracy,       // פידג'טים
         Speed,          // נשימה עמוקה
-        Damage          // פתק
+        Damage,         // פתק
+        Defense
+    }
+    public enum EnvironmentType { 
+        Neutral, 
+        CalmSea, 
+        CrowdedSea, 
+        BusyStreet, 
+        DarkAlley, 
+        Home, 
+        Park, 
+        AcademicBuilding, 
+        Super,
+        CoffeeShop,
+        SecretGarden
     }
 }
