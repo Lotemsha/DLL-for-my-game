@@ -8,8 +8,8 @@ namespace CoreClasses.Models
     {
         public string Name { get; set; }
         public float Health { get; protected set;}
-        public float MaxHealth { get; set;}
-        public float Speed { get; set;}
+        public float MaxHealth { get; protected set; }
+        public float Speed { get; protected set; }
         public int ExperiencePoints { get; set;}
         public bool IsAlive { get; protected set; } = true;
         public InventoryManager Inventory { get; set; }

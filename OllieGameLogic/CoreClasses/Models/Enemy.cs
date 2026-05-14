@@ -23,45 +23,18 @@ namespace CoreClasses.Models
             EmotionalResistance = health / 10;
             BaseAccuracy = baseAccuracy;
         }
-        public string Attack(PlayerManager player)
+        public Enemy Clone()
         {
-            string message = Type switch
-            {
-                EnemyType.Fear =>
-                    $"{Name} grips {player.Name}'s chest with fear, dealing {BaseDamage} emotional damage.",
-
-                EnemyType.Stress =>
-                    $"{Name} piles pressure onto {player.Name}, causing {BaseDamage} emotional strain.",
-
-                EnemyType.Anxiety =>
-                    $"{Name} floods {player.Name}'s mind with racing thoughts, dealing {BaseDamage} emotional damage.",
-
-                EnemyType.Intimidation =>
-                    $"{Name} towers over {player.Name}, overwhelming them with {BaseDamage} emotional damage.",
-
-                EnemyType.Shame =>
-                    $"{Name} whispers harsh self-judgments, hurting {player.Name} for {BaseDamage} emotional damage.",
-
-                EnemyType.Hopelessness =>
-                    $"{Name} drains {player.Name}'s will, inflicting {BaseDamage} emotional damage.",
-
-                EnemyType.Trauma =>
-                    $"{Name} resurfaces painful memories, striking {player.Name} for {BaseDamage} emotional damage.",
-
-                EnemyType.Impatient =>
-                    $"{Name} rushes {player.Name}'s thoughts, hitting for {BaseDamage} emotional damage.",
-
-                EnemyType.Disosiate =>
-                    $"{Name} pulls {player.Name} into emotional detachment, causing {BaseDamage} emotional damage.",
-
-                EnemyType.Numbness =>
-                    $"{Name} dulls {player.Name}'s senses, dealing {BaseDamage} emotional damage.",
-
-                _ =>
-                    $"{Name} affects {player.Name} emotionally for {BaseDamage} damage."
-            };
-
-            return message;
+            return new Enemy(
+                this.EnemyID,
+                this.Name,
+                (int)this.MaxHealth, 
+                this.Speed,
+                (int)this.BaseDamage,
+                this.RewardXP,
+                this.Type,
+                this.BaseAccuracy
+            );
         }
 
         public override void Movement() { }

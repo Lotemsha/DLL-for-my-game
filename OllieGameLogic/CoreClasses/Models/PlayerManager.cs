@@ -12,10 +12,11 @@ namespace CoreClasses.Models
         #region Constants & Fields
         // =====================================================================
 
-        private const float MIN_SPEED_LIMIT = 1.5f;
-        private const float MAX_SPEED_LIMIT = 12.0f;
         private const float STARTING_XP_TO_NEXT_LEVEL = 100f;
         private const float LEVEL_UP_MULTIPLIER = 1.2f;
+
+        private float _minSpeedLimit = 1.5f;
+        private float _maxSpeedLimit = 12.0f;
 
         #endregion
 
@@ -32,20 +33,8 @@ namespace CoreClasses.Models
         {
             get
             {
-                float calculatedSpeed = Speed * TempSpeedModifier;
-
-                // אם החיים מתחת ל-20%, המהירות יורדת ב-50%
-                if (Health < (MaxHealth * 0.2f))
-                {
-                    calculatedSpeed *= 0.5f;
-                }
-                // אם החיים מתחת ל-50%, המהירות יורדת ב-20%
-                else if (Health < (MaxHealth * 0.5f))
-                {
-                    calculatedSpeed *= 0.8f;
-                }
-
-                return Math.Clamp(calculatedSpeed, MIN_SPEED_LIMIT, MAX_SPEED_LIMIT);
+                float calculatedSpeed = Speed * SpeedEffectMultiplier;
+                return Math.Clamp(calculatedSpeed, _minSpeedLimit, _maxSpeedLimit);
             }
         }
 
@@ -96,10 +85,60 @@ namespace CoreClasses.Models
             this.Health = Math.Clamp(savedHealth, 0, MaxHealth);
             this.Anxiety.SetValue(savedAnxiety);
         }
+        public float GetSpeedFactor()
+        {
+            var state = Anxiety.GetState();
+            return state switch
+            {
+                AnxietyState.Freeze => 0.4f,
+                AnxietyState.Panic => 1.2f,
+                AnxietyState.Balanced => 1.0f,
+                _ => 1.0f
+            };
+        }
+        public float SpeedEffectMultiplier
+        {
+            get
+            {
+                float multiplier = TempSpeedModifier;
+
+                // הפחתת מהירות לפי מצב בריאותי
+                if (Health < (MaxHealth * 0.2f)) multiplier *= 0.5f;
+                else if (Health < (MaxHealth * 0.5f)) multiplier *= 0.8f;
+
+                // הפחתת/הגברת מהירות לפי מצב חרדה
+                multiplier *= GetSpeedFactor();
+
+                return multiplier;
+            }
+        }
+
+        public void SpeedLimit (float minSpeed, float maxSpeed)
+        {
+            _maxSpeedLimit = maxSpeed;
+            _minSpeedLimit = minSpeed;
+        }
         #endregion
         // =====================================================================
         #region State
         // =====================================================================
+        public void EnergyDrain(float deltaTime)
+        {
+            if (Health <= 0 || !IsAlive) return;
+
+            // חסינות מבוססת XP
+            float xpBonus = ExperiencePoints / 1000f;
+            float resistance = 1f / (1f + xpBonus);
+
+            // השפעת חרדה: חרדה גבוהה (מעל 70) מאיצה את הניקוז
+            float anxietyPenalty = 1f;
+            if (Anxiety.Value > 70f) anxietyPenalty = 1.5f;
+
+            float baseDrain = 1.0f;
+            float finalDrain = baseDrain * resistance * anxietyPenalty * deltaTime;
+
+            Health = Math.Max(0, Health - finalDrain);
+        }
         public float Heal(float amount)
         {
             float healthBefore = Health;

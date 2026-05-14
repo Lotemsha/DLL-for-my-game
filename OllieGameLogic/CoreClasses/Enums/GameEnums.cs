@@ -9,7 +9,7 @@
     public enum EnemyType
     {
         Fear, Stress, Anxiety, Intimidation, Shame,
-        Hopelessness, Trauma, Impatient, Disosiate, Numbness
+        Hopelessness, Trauma, Impatient, Dissociate, Numbness
     }
     // מצבים של השחקן
     public enum GameState { MainMenu, Roaming, Combat, Paused, GameOver }
@@ -42,4 +42,12 @@
         CoffeeShop,
         SecretGarden
     }
+
+    public enum AttackOutcome { Hit, Miss, CriticalFail }
+    public struct AttackResult
+    {
+        public AttackOutcome Outcome;
+        public float Damage;
+    }
+
 }
